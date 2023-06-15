@@ -8,7 +8,8 @@ const config: ConnectionOptions = {
   password: 'poshik',
   database: 'mediumclone',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
-  synchronize: true,
+  synchronize: false,
+  migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
 };
 
 export default config;
