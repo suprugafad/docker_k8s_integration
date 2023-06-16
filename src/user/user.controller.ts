@@ -16,6 +16,7 @@ import { User } from '@app/user/decoritors/user.decorator';
 import { UserEntity } from '@app/user/user.entity';
 import { AuthGuard } from '@app/user/guards/auth.guard';
 import { UpdateUserDto } from '@app/user/dto/updateUser.dto';
+import { UserUpdateResponseInterface } from '@app/user/types/userUpdateResponse.interface';
 
 @Controller()
 export class UserController {
@@ -49,11 +50,11 @@ export class UserController {
   async updateCurrentUser(
     @User('id') currentUserId: number,
     @Body('user') updateUserDto: UpdateUserDto,
-  ): Promise<UserResponseInterface> {
+  ): Promise<UserUpdateResponseInterface> {
     const updatedUser = await this.userService.updateUser(
       currentUserId,
       updateUserDto,
     );
-    return this.userService.buildUserResponse(updatedUser);
+    return this.userService.buildUpdateUserResponse(updatedUser);
   }
 }
