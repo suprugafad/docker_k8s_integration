@@ -6,7 +6,6 @@ import {
   Put,
   UseGuards,
   UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from '@app/user/user.service';
 import { CreateUserDto } from '@app/user/dto/createUser.dto';
@@ -17,12 +16,13 @@ import { UserEntity } from '@app/user/user.entity';
 import { AuthGuard } from '@app/user/guards/auth.guard';
 import { UpdateUserDto } from '@app/user/dto/updateUser.dto';
 import { UserUpdateResponseInterface } from '@app/user/types/userUpdateResponse.interface';
+import { BackendValidationPipe } from '@app/shared/pipes/backendValidation.pipe';
 
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
   @Post('users')
-  @UsePipes(new ValidationPipe())
+  @UsePipes(new BackendValidationPipe())
   async createUser(
     @Body('user') createUserDto: CreateUserDto,
   ): Promise<UserResponseInterface> {
@@ -31,7 +31,7 @@ export class UserController {
   }
 
   @Post('users/login')
-  @UsePipes(new ValidationPipe())
+  @UsePipes(new BackendValidationPipe())
   async authenticateUser(
     @Body('user') loginUserDto: LoginUserDto,
   ): Promise<UserResponseInterface> {
