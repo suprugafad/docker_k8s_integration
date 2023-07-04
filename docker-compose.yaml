@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    env_file:
+      - src/env/db.env
+
+  back:
+    build: ./
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    env_file:
+      - src/env/back.env
+    command: /bin/sh -c "npm run db:migrate && npm run start:prod"
