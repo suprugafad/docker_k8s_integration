@@ -1,16 +1,31 @@
 version: '3.8'
 services:
   db:
+    container_name: medium-postgres
     image: postgres:latest
+    restart: always
     env_file:
       - src/env/db.env
-
+    ports:
+      - '5432:5432'
+    networks:
+      - medium
+    volumes:
+      - postgres:/var/lib/postgresql/data
   back:
+    container_name: medium-back
     build: ./
     ports:
       - '3000:3000'
     depends_on:
       - db
+    networks:
+      - medium
     env_file:
       - src/env/back.env
-    command: /bin/sh -c "npm run db:migrate && npm run start:prod"
+    command: ["./entrypoint.sh"]
+volumes:
+  postgres:
+networks:
+  medium:
+    driver: bridge
