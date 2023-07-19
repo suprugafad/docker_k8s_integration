@@ -2,7 +2,7 @@ import { ConnectionOptions } from 'typeorm';
 
 const config: ConnectionOptions = {
   type: 'postgres',
-  host: 'db',
+  host: 'postgres',
   port: parseInt(process.env.DATABASE_PORT),
   username: 'mediumclone',
   password: process.env.DATABASE_PASSWORD,
