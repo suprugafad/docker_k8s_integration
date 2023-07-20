@@ -14,7 +14,7 @@ spec:
     spec:
       initContainers:
         - name: migration
-          image: suprugafad/medium-clone
+          image: suprugafad/medium-clone:1
           command: [ "npm", "run", "db:migrate" ]
           env:
             - name: DATABASE_USERNAME
@@ -32,7 +32,7 @@ spec:
                 name: nestjs-configmap
       containers:
         - name: nestjs
-          image: suprugafad/medium-clone
+          image: suprugafad/medium-clone:1
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
