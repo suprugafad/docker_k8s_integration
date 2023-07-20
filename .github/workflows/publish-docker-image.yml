@@ -26,7 +26,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: suprugafad/medium-clone:latest
+        tags: suprugafad/medium-clone:latest, suprugafad/medium-clone:1
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag back:$(date +%s)
